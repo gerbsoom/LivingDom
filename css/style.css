@@ -6,20 +6,83 @@
  * @author Markus Riegert <desmodul@drow-land.de>
  */
 
-.randomDiv
+.body
 {
     padding: 0;
     border: 2px;
-    width: 25px;
-    height: 25px;
-
     color: #FFFFFF;
     background-color: #000000;
 
-    /*opacity: 0.5;
-    box-shadow: 0 0 1px 2px #000000;*/
+    font-size: 16pt;
+    font-weight: bold;
+    font-family: Consolas, monospace;
+    font-style: inherit;
+    text-decoration: inherit;
+}
 
-    float: left;
+.div
+{
+    padding: 0;
+    border: 2px;
+    color: #FFFFFF;
+    background-color: #000000;
+
+    font-size: 16pt;
+    font-weight: inherit;
+    font-family: inherit;
+    font-style: inherit;
+    text-decoration: inherit;
+}
+
+.headerDiv
+{
+    width: 1000px;
+    height: 250px;
+
+    opacity: 0.8;
+    box-shadow: 0 0 1px 2px #000000;
+
+    font-size: 32pt;
+    font-weight: bold;
+    font-family: Consolas, monospace;
+    font-style: inherit;
+    text-decoration: inherit;
+
+    position: absolute;
+    align-content: center;
+}
+
+.dom-backgound
+{
+    padding: 0;
+    border: 2px;
+    width: 1000px;
+    height: 750px;
+    position: absolute;
+    align-content: center;
+
+    color: #AAAAAA;
+    background-color: #555555;
+
+    opacity: 0.4;
+    box-shadow: 0 0 1px 2px #000000;
+}
+
+/**
+.dom-table {}
+.dom-table-tr {}
+.dom-table-td {}
+*/
+
+.basicDiv
+{
+    padding: 0;
+    border: 2px;
+    width: 23px;
+    height: 23px;
+
+    color: #FFFFFF;
+    background-color: #000000;
 
     font-size: inherit;
     font-weight: inherit;

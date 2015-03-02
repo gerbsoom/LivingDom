@@ -10,7 +10,7 @@
  * Constructs a DomNode from the provided input parameters.
  *
  * @param _domNodeId Unique ID to identify the HTMLElement.
- * @param _domNodeContent The raw HTML content of the DomNode.
+ * @param _domNodeContent The raw HTML content which gets set as content for the underlying DomNode.
  * @param _parentDomNode The parent DomNode which holds the reference of this node and spawned it into the DOM.
  * @constructor
  */
@@ -21,6 +21,7 @@ function DomNode(_domNodeId, _domNodeContent, _parentDomNode)
 
     /** @var HTMLElement domNodeContent */
     var domNodeContent = _domNodeContent;
+
     /** @var DomNode parentDomNode */
     var parentDomNode = _parentDomNode;
 
@@ -31,7 +32,6 @@ function DomNode(_domNodeId, _domNodeContent, _parentDomNode)
     if (!(parentDomNode instanceof DomNode))
     {// no parent DomNode means we are a root node
         isRootNode = true;
-        document.body.appendChild(domNodeContent);
     }
 
     /**
@@ -165,13 +165,15 @@ function DomNode(_domNodeId, _domNodeContent, _parentDomNode)
     };
 
     /**
-     * Debugs detail informatioon about the state of this DomNode.
+     * Debugs detail information about the state of this DomNode.
      */
     this.debugDomNode = function()
     {
         if (matchesDebugMode("debug"))
         {
-
+            // changedDomNodeContentList and the current HTML structure
+            // changedDomNodeParentList and up to a specific iteration level with parent::debugDomNode()
+            // currentDomNodeChildrenContent and down to a specific iteration level with children::debugDomNode()
         }
     }
 

@@ -1,5 +1,8 @@
 /.gitignore
 
+# .mybak for temp stuff/snippets
+.mybak
+
 # .idea files from JetBrains
 .idea
 
