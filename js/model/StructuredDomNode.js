@@ -38,7 +38,7 @@ function StructuredDomNode(_domNodeId, _parentDomNode)
         return isRootNode;
     };
 
-    this.getDomId = function()
+    this.getDomNodeId = function()
     {
         return domNodeId;
     };

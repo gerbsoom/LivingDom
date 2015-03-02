@@ -47,9 +47,9 @@ function HtmlStructure(_structureId, _parentDomNode)
     };
 
     /**
-     * Returns the underlying getAppendNode.
+     * Returns the HtmlEntity at index _pos.
      *
-     * @returns The underlying getAppendNode.
+     * @returns HtmlEntity The HtmlEntity at index _pos.
      */
     this.getEntityAtPos = function(_pos)
     {

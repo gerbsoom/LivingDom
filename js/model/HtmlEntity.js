@@ -24,20 +24,26 @@ function HtmlEntity(_type, _subElementId, _classId, _styleSetConfig, _parentDomN
     /** @var StructuredDomNode parentNode */
     var parentDomNode = _parentDomNode;
 
+    /** @var HTMLElement */
     var element = document.createElement(_type);
     if (_classId) element.setAttribute('class', _classId);
     if (subElementId) element.setAttribute('id', subElementId);
     if (_styleSetConfig != null) element.setAttribute('style', _styleSetConfig);
 
-    this.setStyleAttribut = function(_styleAttribut)
+    /**
+     * Sets the style attribute for the underlying Entity.
+     *
+     * @param _styleAttribute The set style attribute.
+     */
+    this.setStyleAttribute = function(_styleAttribute)
     {
-        element.setAttribute('style', _styleAttribut);
+        element.setAttribute('style', _styleAttribute);
     };
 
     /**
      * Returns the underlying element as node for appending.
      *
-     * @returns {*} The underlying element as node for appending..
+     * @returns HTMLElement The underlying element as node for appending.
      */
     this.getAppendNode = function()
     {
