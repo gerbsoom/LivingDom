@@ -6,7 +6,49 @@
  * @author Markus Riegert <desmodul@drow-land.de>
  */
 
-.dom-table
+div.alignerDiv
+{
+    padding: 5px;
+    width: 1650px;
+    height: 760px;
+}
+
+div.maindiv
+{
+    padding: 0;
+    width: 1605px;
+    height: 750px;
+    overflow: hidden;
+}
+
+div.dom-leftContent
+{
+    padding: 0;
+    width: 1000px;
+    height: 750px;
+    float: left;
+}
+
+div.dom-header
+{
+    padding: 0;
+    width: 1000px;
+    height: 50px;
+    text-align: center;
+
+    color: #FFFFFF;
+    background-color: #000000;
+    opacity: 0.8;
+    box-shadow: 0 0 1px 2px #000000;
+
+    font-size: 28pt;
+    font-weight: bold;
+    font-family: Consolas, monospace;
+    font-style: inherit;
+    text-decoration: inherit;
+}
+
+table.dom-table
 {
     /*background: rgba(0, 0, 0, 0.8);*/
     background: url("../img/grid4.png") no-repeat;
@@ -27,18 +69,46 @@
     font-family: Consolas, monospace;
 }
 
-.dom-header
+div.infoview-toolbar
 {
-    width: 1000px;
+    padding: 0;
+    width: 600px;
     height: 50px;
+    float: right;
+
+    color: #FFFFFF;
+    background-color: #000000;
+    opacity: 0.4;
+    box-shadow: 0 0 1px 2px #000000;
+
+    font-size: 12pt;
+    font-weight: bold;
+    font-family: Consolas, monospace;
+    font-style: inherit;
+    text-decoration: inherit;
+}
+
+div.toolbar-spacer
+{
+    padding: 0;
+    width: 50px;
+    float: left;
+}
+
+div.dom-infoview
+{
+    padding: 2px;
+    width: 600px;
+    height: 700px;
+    float: right;
 
     color: #FFFFFF;
     background-color: #000000;
     opacity: 0.8;
     box-shadow: 0 0 1px 2px #000000;
 
-    font-size: 32pt;
-    font-weight: bold;
+    font-size: 12pt;
+    font-weight: normal;
     font-family: Consolas, monospace;
     font-style: inherit;
     text-decoration: inherit;

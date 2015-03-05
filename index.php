@@ -21,14 +21,25 @@
         <script type="text/javascript" src="js/model/HtmlEntity.js"></script>
         <script type="text/javascript" src="js/model/HtmlStructure.js"></script>
         <script type="text/javascript" src="js/model/StructuredDomNode.js"></script>
+        <script type="text/javascript" src="js/controller/clickhandler.js"></script>
 
     </head>
-    <body onload="startApp(50);">
-
-    <?PHP
-        require_once("php/view/gen-dom-header.php");
-        require_once("php/view/gen-dom-background.php");
-    ?>
-
+    <body>
+        <div class="alignerDiv">
+            <div class="maindiv">
+                <div class="dom-leftContent" id="dom-leftContent">
+                        <?PHP
+                            require_once("php/view/gen-dom-header.php");
+                            require_once("php/view/gen-dom-table.php");
+                        ?>
+                </div>
+                    <?PHP
+                        require_once("php/view/gen-dom-infoview.php");
+                    ?>
+            </div>
+        </div>
+        <script>
+            startApp(50);
+        </script>
     </body>
 </html>

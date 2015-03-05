@@ -22,11 +22,17 @@ function HtmlEntity(_type, _subElementId, _classId, _styleSetConfig, _htmlStruct
     var classId = _classId;
     var subElementId = _subElementId;
     var htmlStructure = _htmlStructure;
+    var clickHandler = new ClickHandler();
+    clickHandler.registerElement(subElementId, this);
+
     var htmlElement = document.createElement(_type);
 
     htmlElement.setAttribute('id', subElementId);
     if (_classId) htmlElement.setAttribute('class', _classId);
     if (_styleSetConfig != null) htmlElement.setAttribute('style', _styleSetConfig);
+
+    // add EventListener to handle clicks on the focused HTML-Element
+    htmlElement.addEventListener('click', function() { clickHandler.handleClick(subElementId) }, false);
 
     /**
      * Returns the unique ID of this HtmlEntity.

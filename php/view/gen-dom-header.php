@@ -8,5 +8,5 @@
 */-->
 
 <div class="dom-header" id="dom-header">
-LivingDom - A (DOM) Manipulation Framework
+[LivingDom] - DOM Manipulation Framework
 </div>

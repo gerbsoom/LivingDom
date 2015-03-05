@@ -98,6 +98,23 @@ function HtmlStructure(_structureId, _structureDomNode)
         lastHtmlEntity = _htmlEntity;
     };
 
+    /*
+    DOES NOT WORK AS INTENDED...
+    ___________________________________
+    this.removeAllEntities = function()
+    {
+        for (var i=0; i<htmlEntities.length; i++)
+        {
+            this.removeEntity(htmlEntities[i]);
+        }
+    };
+
+    this.removeEntity = function(_htmlEntity)
+    {
+        _htmlEntity.getHtmlElement().parentNode.removeChild(_htmlEntity.getHtmlElement());
+    };
+    */
+
     /**
      * Returns the ID of this HtmlStructure.
      *
