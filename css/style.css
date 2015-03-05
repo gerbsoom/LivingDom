@@ -6,6 +6,27 @@
  * @author Markus Riegert <desmodul@drow-land.de>
  */
 
+.dom-table
+{
+    /*background: rgba(0, 0, 0, 0.8);*/
+    background: url("../img/grid4.png") no-repeat;
+    background-size : cover;
+    padding: 0;
+    border: 2px;
+    width: 1000px;
+    height: 700px;
+    overflow: hidden;
+
+    color: #EEEEEE;
+    background-color: darkslategray;
+    box-shadow: 0 0 1px 2px #000000;
+    opacity: 0.92;
+
+    font-size: 32pt;
+    font-weight: bold;
+    font-family: Consolas, monospace;
+}
+
 .dom-header
 {
     width: 1000px;
@@ -23,24 +44,6 @@
     text-decoration: inherit;
 }
 
-.dom-backgound
-{
-    padding: 0;
-    border: 2px;
-    width: 1000px;
-    height: 700px;
-    overflow: hidden;
-
-    color: #EEEEEE;
-    background-color: slategray;
-    box-shadow: 0 0 1px 2px #000000;
-    opacity: 0.85;
-
-    font-size: 32pt;
-    font-weight: bold;
-    font-family: Consolas, monospace;
-}
-
 .dom-table-td
 {
     padding: 0;
@@ -56,7 +59,7 @@
     color: #FFFFFF;
     background-color: #000000;
     box-shadow: 0 0 1px 2px #000000;
-    opacity: 0.8;
+    opacity: 0.85;
 
     font-size: inherit;
     font-weight: inherit;

@@ -7,8 +7,8 @@
 * @author Markus Riegert <desmodul@drow-land.de>
 */-->
 
-<div class="dom-backgound" id="dom-backgound">
-    <table class="dom-backgound" id="dom-table">
+<div id="dom-backgound">
+    <table class="dom-table" id="dom-table">
         <tr id="dom-table-tr1" class="dom-table-tr">
             <td id="dom-table-td_11" class="dom-table-td"></td>
             <td id="dom-table-td_21" class="dom-table-td"></td>
