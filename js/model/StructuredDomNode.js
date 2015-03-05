@@ -10,69 +10,102 @@
  * Constructs a StructuredDomNode from the provided input parameters.
  *
  * @param _domNodeId Unique ID to identify the HTMLElement.
- * @param _parentDomNode The parent DomNode which holds the reference of this node and spawned it into the DOM.
+ * @param _parentNode The parental StructuredDomNode which holds our own reference spawns us into the DOM.
+ *        parentNode can be any HTMLElement implementing the node interface, if omitted it fall backs to document.body.
  * @constructor
  */
-function StructuredDomNode(_domNodeId, _parentDomNode)
+function StructuredDomNode(_domNodeId, _parentNode)
 {
+    /** @var Logger */
+    var logger = new Logger("verbose", null);
+
+    /** @var Builder */
+    var builder = new Builder();
+
     /** @var Unique ID to identify the DOM node */
     var domNodeId = _domNodeId;
 
-    /** @var StructuredDomNode */
-    var parentDomNode = _parentDomNode;
+    var parentNode = _parentNode;
 
     /** @var DomNode[] domNodeChildren */
     var domNodeChildren = [];
 
-    var isRootNode = false;
-    if (!(parentDomNode instanceof StructuredDomNode))
-    {// no parent DomNode means we are a root node
-        isRootNode = true;
+    /** @var HTMLStructure */
+    var htmlStructure = new HtmlStructure(domNodeId + "_" + getNextDomId("htmlStructure"), this);
+    var rootHtmlEntity = builder.createRandomHtmlEntity(htmlStructure);
+
+    if (parentNode instanceof StructuredDomNode)
+    {
+        addElementToComponent(parentNode.getHtmlStructure().getLastHtmlEntity(), rootHtmlEntity.getHtmlElement());
+    }
+    else if (parentNode instanceof HTMLElement || parentNode instanceof Element)
+    {// better check was to assert that parentNode implements the node interface
+        parentNode.appendChild(rootHtmlEntity.getHtmlElement());
+    }
+    else
+    {// we are a root node and have to append the initial DIV to document.body
+        document.body.appendChild(rootHtmlEntity.getHtmlElement());
     }
 
-    /** @var HTMLStructure */
-    var domNodeHtmlStructure = new HtmlStructure(domNodeId + "_" + getNextDomId("nextHtmlStructure"), parentDomNode);
+    htmlStructure.setLastHtmlEntity(rootHtmlEntity.getHtmlElement());
 
+    /**
+     * Returns if this is a root node which means that there is no parent.
+     *
+     * @returns {boolean} True means that this is a root node.
+     */
     this.isRootNode = function()
     {
-        return isRootNode;
+        return (parentNode instanceof StructuredDomNode);
     };
 
+    /**
+     * Returns the unique ID of this StructuredDomNode.
+     *
+     * @returns The unique ID of this StructuredDomNode.
+     */
     this.getDomNodeId = function()
     {
         return domNodeId;
     };
 
+    /**
+     * Returns the parentDomNode.
+     *
+     * @returns {*} The returned parentDomNode.
+     */
     this.getParentDomNode = function()
     {
-        if (isRootNode)
+        var result;
+        if (this.isRootNode()) result = null;
+        else
         {
-            return null;
+            result = parentNode;
         }
-        else return parentDomNode;
-    };
+        logger.debug("[StructuredDomNode] getParentDomNode()", result);
 
-    this.getParentAppendNode = function()
-    {
-        if (isRootNode)
-        {
-            return document.body;
-        }
-        else return parentDomNode.getHtmlStructure().getLastHtmlEntity().getAppendNode();
+        return result;
     };
 
     /**
-     * Returns the configured HTMLElement of this DomNode.
+     * Sets the parentNode.
      *
-     * @returns {*} The configured HTMLElement of this DomNode.
+     * @param _parentNode The set parentNode.
+     */
+    this.setParentDomNode = function(_parentNode)
+    {
+        parentNode = _parentNode;
+        // toDo: Trigger re-calc?
+    };
+
+     /**
+     * Returns the HtmlStructure of this StructuredDomNode.
+     *
+     * @returns {*} The HtmlStructure of this StructuredDomNode.
      */
     this.getHtmlStructure = function()
     {
-        if (matchesDebugMode("debug"))
-        {
-            console.log("[DOM-NODE] getDomNodeContent()", domNodeHtmlStructure);
-        }
-        return domNodeHtmlStructure;
+        return htmlStructure;
     };
 
     /**
@@ -82,9 +115,11 @@ function StructuredDomNode(_domNodeId, _parentDomNode)
      */
     this.addHtmlStructure = function(_htmlStructure)
     {
+        logger.debug("[StructuredDomNode] addHtmlStructure()", htmlStructure);
+
         for (var i=0; i < _htmlStructure.length; i++)
         {
-            this.addHtmlEntity(_htmlStructure[i]);
+            this.addHtmlEntity(_htmlStructure.getEntityAtPos(i));
         }
     };
 
@@ -95,7 +130,9 @@ function StructuredDomNode(_domNodeId, _parentDomNode)
      */
     this.addHtmlEntity = function(_htmlEntity)
     {
-        domNodeHtmlStructure.addHtmlEntity(_htmlEntity);
+        logger.debug("[StructuredDomNode] addHtmlEntity()", _htmlEntity);
+
+        htmlStructure.addHtmlEntity(_htmlEntity);
     };
 
     /**
@@ -105,17 +142,11 @@ function StructuredDomNode(_domNodeId, _parentDomNode)
      */
     this.addDomNodeChildren = function(_domNodeChildren)
     {
-        if (matchesDebugMode("debug"))
-        {
-            console.log("[STRUCTURED-DOM-NODE] addDomNodeChildren()", _domNodeChildren);
-        }
+        logger.debug("[StructuredDomNode] addDomNodeChildren()", _domNodeChildren);
+
         domNodeChildren.push(_domNodeChildren);
 
-        var providedDomNodeHtmlStructure = _domNodeChildren.getHtmlStructure();
-        for (var i=0; i < providedDomNodeHtmlStructure.length; i++)
-        {
-            this.addHtmlEntity(providedDomNodeHtmlStructure.getEntityAtPos(i));
-        }
+        this.addHtmlStructure(_domNodeChildren.getHtmlStructure());
     };
 
     /**
@@ -125,10 +156,6 @@ function StructuredDomNode(_domNodeId, _parentDomNode)
      */
     this.getDomNodeChildren = function()
     {
-        if (matchesDebugMode("debug"))
-        {
-            console.log("[DOM-NODE] getDomNodeChildren()", domNodeChildren);
-        }
         return domNodeChildren;
     };
 

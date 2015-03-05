@@ -14,15 +14,16 @@
 
         <link rel="stylesheet" type="text/css" href="css/style.css"/>
 
-        <script type="text/javascript" src="js/lib.js"></script>
-        <script type="text/javascript" src="js/model/DomNode.js"></script>
-        <script type="text/javascript" src="js/model/StructuredDomNode.js"></script>
         <script type="text/javascript" src="js/app.js"></script>
+        <script type="text/javascript" src="js/logger.js"></script>
+        <script type="text/javascript" src="js/builder.js"></script>
+        <script type="text/javascript" src="js/library.js"></script>
         <script type="text/javascript" src="js/model/HtmlEntity.js"></script>
         <script type="text/javascript" src="js/model/HtmlStructure.js"></script>
+        <script type="text/javascript" src="js/model/StructuredDomNode.js"></script>
 
     </head>
-    <body onload="startDomManipulation();">
+    <body onload="startApp(50);">
 
     <?PHP
         require_once("php/view/gen-dom-header.php");

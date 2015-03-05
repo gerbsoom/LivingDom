@@ -13,52 +13,20 @@
  * @param _subElementId The unique ID to identify the HtmlEntity.
  * @param _classId The css class which is completely written on this HtmlEntity.
  * @param _styleSetConfig A styleSetConfig which gets written (last) on this HtmlEntity.
- * @param _parentDomNode The parent DomNode which holds our reference and spawned us into the DOM.
+ * @param _htmlStructure The htmlStructure where the underlying HtmlEntity is contained in.
  * @constructor
  */
-function HtmlEntity(_type, _subElementId, _classId, _styleSetConfig, _parentDomNode)
+function HtmlEntity(_type, _subElementId, _classId, _styleSetConfig, _htmlStructure)
 {
     var type = _type;
+    var classId = _classId;
     var subElementId = _subElementId;
+    var htmlStructure = _htmlStructure;
+    var htmlElement = document.createElement(_type);
 
-    /** @var StructuredDomNode parentNode */
-    var parentDomNode = _parentDomNode;
-
-    /** @var HTMLElement */
-    var element = document.createElement(_type);
-    if (_classId) element.setAttribute('class', _classId);
-    if (subElementId) element.setAttribute('id', subElementId);
-    if (_styleSetConfig != null) element.setAttribute('style', _styleSetConfig);
-
-    /**
-     * Sets the style attribute for the underlying Entity.
-     *
-     * @param _styleAttribute The set style attribute.
-     */
-    this.setStyleAttribute = function(_styleAttribute)
-    {
-        element.setAttribute('style', _styleAttribute);
-    };
-
-    /**
-     * Returns the underlying element as node for appending.
-     *
-     * @returns HTMLElement The underlying element as node for appending.
-     */
-    this.getAppendNode = function()
-    {
-        return element;
-    };
-
-    this.getParentDomNode = function()
-    {
-        return parentDomNode;
-    };
-
-    this.getType = function()
-    {
-        return type;
-    };
+    htmlElement.setAttribute('id', subElementId);
+    if (_classId) htmlElement.setAttribute('class', _classId);
+    if (_styleSetConfig != null) htmlElement.setAttribute('style', _styleSetConfig);
 
     /**
      * Returns the unique ID of this HtmlEntity.
@@ -70,30 +38,64 @@ function HtmlEntity(_type, _subElementId, _classId, _styleSetConfig, _parentDomN
         return subElementId;
     };
 
-    this.generateBasicRandomStyleSheet = function()
+    /**
+     * Returns the class ID of this HtmlEntity.
+     *
+     * @returns The class ID of this HtmlEntity.
+     */
+    this.getClassId = function()
     {
-        var color = "#";
-        var bgColor = "#";
-        var randomStileSheet;
+        return classId;
+    };
 
-        for (var i=1; i<=6; i++)
-        {
-            color += parseInt(Math.random()*16).toString(16);
+    /**
+     * Return the type of the underlying HtmlElement.
+     *
+     * @returns {*}
+     */
+    this.getType = function()
+    {
+        return type;
+    };
 
-            bgColor += parseInt(Math.random()*16).toString(16);
-        }
-        console.log("[HTML-ENTITY] Debug generated random color: ", color);
-        randomStileSheet = "background-color: " + bgColor + "; color: " + color;
-        randomStileSheet += "; width: " + (parseInt(Math.random()*25)+15) + "px";
-        randomStileSheet += "; height: " + (parseInt(Math.random()*25)+25) + "px";
+    /**
+     * Returns the underlying element as node for appending.
+     *
+     * @returns HTMLElement The underlying element as node for appending.
+     */
+    this.getHtmlElement = function()
+    {
+        return htmlElement;
+    };
 
-        if (parseInt(Math.random()*10) >= 5)
-        {
-            randomStileSheet += "; float: left";
-        }
-        else randomStileSheet += "; float: right";
+    /**
+     * Returns the HtmlStructure where the HtmlEntity is contained in.
+     *
+     * @returns HtmlStructure The HtmlStructure where the HtmlEntity is contained in.
+     */
+    this.getHtmlStructure = function()
+    {
+        return htmlStructure;
+    };
 
-        return randomStileSheet;
-    }
+    /**
+     * Sets the HtmlStructure where the HtmlEntity is contained in.
+     *
+     * @param _htmlStructure Sets the HtmlStructure where the HtmlEntity is contained in.
+     */
+    this.setHtmlStructure = function(_htmlStructure)
+    {
+        htmlStructure = _htmlStructure;
+    };
+
+    /**
+     * Sets the style attribute for the underlying Entity.
+     *
+     * @param _styleAttribute The set style attribute.
+     */
+    this.setStyleAttribute = function(_styleAttribute)
+    {
+        htmlElement.setAttribute('style', _styleAttribute);
+    };
 
 }

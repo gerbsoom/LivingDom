@@ -10,10 +10,10 @@
  * Constructs an HtmlStructure from the provided input parameters.
  *
  * @param _structureId The unique ID to identify the HtmlStructure.
- * @param _parentDomNode The parent DomNode which holds our reference and spawned us into the DOM.
+ * @param _structureDomNode The DomNode which holds our reference and spawned us into the DOM.
  * @constructor
  */
-function HtmlStructure(_structureId, _parentDomNode)
+function HtmlStructure(_structureId, _structureDomNode)
 {
     var structureId = _structureId;
 
@@ -23,8 +23,8 @@ function HtmlStructure(_structureId, _parentDomNode)
     /** @var HtmlEntity */
     var lastHtmlEntity;
 
-    /** @var StructuredDomNode parentDomNode */
-    var parentDomNode = _parentDomNode;
+    /** @var StructuredDomNode */
+    var structureDomNode = _structureDomNode;
 
     /**
      * Returns a reference to the lastly added HtmlEntity for appending DOM nodes.
@@ -37,13 +37,23 @@ function HtmlStructure(_structureId, _parentDomNode)
     };
 
     /**
-     * Returns the StructuredDomNode of the parentNode.
+     * Sets a reference to the last added HtmlEntity for appending DOM nodes.
      *
-     * @returns {*} The StructuredDomNode of the parentNode.
+     * @param _lastHtmlEntity Sets the last added HtmlEntity.
      */
-    this.getParentDomNode = function()
+    this.setLastHtmlEntity = function(_lastHtmlEntity)
     {
-        return parentDomNode;
+        lastHtmlEntity = _lastHtmlEntity;
+    };
+
+    /**
+     * Returns the StructuredDomNode where we the structure is contained.
+     *
+     * @returns {*} The StructuredDomNode where we the structure is contained.
+     */
+    this.getStructuredDomNode = function()
+    {
+        return structureDomNode;
     };
 
     /**
@@ -60,28 +70,32 @@ function HtmlStructure(_structureId, _parentDomNode)
         return null;
     };
 
-    this.addHtmlEntity = function(_htmlEntity)
-    {
-        htmlEntities.push(_htmlEntity);
-        if (lastHtmlEntity != undefined)
-        {
-            addElementToComponent(lastHtmlEntity.getAppendNode(), _htmlEntity.getAppendNode());
-        }
-        else if (parentDomNode instanceof StructuredDomNode)
-        {
-            addElementToComponent(parentDomNode.getHtmlStructure().getLastHtmlEntity().getAppendNode(), _htmlEntity.getAppendNode());
-        }
-        else addElementToComponent(document.body, _htmlEntity.getAppendNode());
-
-        lastHtmlEntity = _htmlEntity;
-    };
-
-    this.addHtmlStructure = function(_htmlStructure)
+    /**
+     * Adds all HtmlEntities contained in the provided HtmlStructure.
+     *
+     * @param _htmlStructure Contains all HtmlEntities that get added.
+     */
+    this.addFromStructure = function(_htmlStructure)
     {
         for (var i=0; i<_htmlStructure.length; i++)
         {
             this.addHtmlEntity(_htmlStructure.getEntityAtPos(i));
         }
+    };
+
+    /**
+     * Adds an HtmlEntities.
+     *
+     * @param _htmlEntity The HtmlEntity that gets added.
+     */
+    this.addHtmlEntity = function(_htmlEntity)
+    {
+        htmlEntities.push(_htmlEntity);
+        if (lastHtmlEntity != undefined)
+        {
+            addElementToComponent(lastHtmlEntity.getHtmlElement(), _htmlEntity.getHtmlElement());
+        }
+        lastHtmlEntity = _htmlEntity;
     };
 
     /**
