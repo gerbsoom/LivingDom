@@ -1,0 +1,76 @@
+<!--
+/**
+* This file is part of LivingDom - A DOM Manipulation Framework.
+* Please check the file LICENSE.md for information about the license.
+*
+* @copyright Markus Riegert 2015
+* @author Markus Riegert <desmodul@drow-land.de>
+*/-->
+
+<html>
+    <head>
+        <title>[LivingDom] A DOM Manipulation Framework</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+
+        <link rel="stylesheet" type="text/css" href="css/style.css"/>
+
+        <script type="text/javascript" src="js/app.js"></script>
+        <script type="text/javascript" src="js/logger.js"></script>
+        <script type="text/javascript" src="js/builder.js"></script>
+        <script type="text/javascript" src="js/library.js"></script>
+        <script type="text/javascript" src="js/model/HtmlEntity.js"></script>
+        <script type="text/javascript" src="js/model/HtmlStructure.js"></script>
+        <script type="text/javascript" src="js/model/StructuredDomNode.js"></script>
+        <script type="text/javascript" src="js/controller/clickhandler.js"></script>
+
+    </head>
+
+    <body>
+        <div class="alignerDiv">
+            <div class="maindiv">
+                <div class="dom-leftContent" id="dom-leftContent">
+
+                    <div class="dom-header" id="dom-header">
+                        [LivingDom] - DOM Manipulation Framework
+                    </div>
+
+                    <table class="dom-table" id="dom-table">
+                        <tr id="dom-table-tr1" class="dom-table-tr">
+                            <td id="dom-table-td_11" class="dom-table-td"></td>
+                            <td id="dom-table-td_21" class="dom-table-td"></td>
+                            <td id="dom-table-td_31" class="dom-table-td"></td>
+                        </tr>
+
+                        <tr id="dom-table-tr2" class="dom-table-tr">
+                            <td id="dom-table-td_12" class="dom-table-td"></td>
+                            <td id="dom-table-td_22" class="dom-table-td">
+                                <div id="dom-table-div-root"></div>
+                            </td>
+                            <td id="dom-table-td_32" class="dom-table-td"></td>
+                        </tr>
+
+                        <tr id="dom-table-tr3" class="dom-table-tr">
+                            <td id="dom-table-td_13" class="dom-table-td"></td>
+                            <td id="dom-table-td_23" class="dom-table-td"></td>
+                            <td id="dom-table-td_33" class="dom-table-td"></td>
+                        </tr>
+                    </table>
+
+                </div>
+
+                <div class="infoview-toolbar" id="dom-infoView_Header">
+                    <div class="toolbar-spacer"></div><div>InfoViewToolbar</div>
+                </div>
+
+                <div class="dom-infoview" id="dom-infoView_1">
+                    <h1>Node-Details</h1>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            startApp(50);
+        </script>
+
+    </body>
+</html>
